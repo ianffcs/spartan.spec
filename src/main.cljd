@@ -1,0 +1,31 @@
+(ns main
+  (:require [cljd.spec.alpha :as s]
+            [core :as c]))
+
+(defn b [] (println "a"))
+
+(s/def ::a keyword?)
+
+(defmacro resolve-symbol
+  [form]
+  (println (-> &env
+               :nses
+               :current-ns
+               name
+               #_#_(get (-> `form
+                            namespace
+                            symbol))
+               (get 'a)
+
+               #_keys))
+  #_(let [form-ns (-> &env
+                      :nses
+                      (get `(namespace ~form)))]
+      &env))
+
+(defn main
+  []
+  (println "AAAA")
+  (println "BBBBB: " (namespace `c/c))
+  (println (str "BBBBB: " (s/valid? ::a :f)))
+  (println "CCCCC: " (resolve-symbol `c/c)))

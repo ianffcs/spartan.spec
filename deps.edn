@@ -1,3 +1,11 @@
-{:aliases {:expound {:extra-deps {expound/expound {:mvn/version "0.8.7"}}}
-           :crucible {:extra-deps {crucible/crucible {:mvn/version "0.46.0"}}}
-           :test {:extra-paths ["test"]}}}
+{:paths     ["src"]
+ :deps      {tensegritics/clojuredart {:git/url "https://github.com/tensegritics/ClojureDart.git"
+                                       :sha     "75665e2018b5c373b2e90d2299579fec7f94b3db"}
+             town.lilac/pyramid       {:mvn/version "3.4.0"}}
+ :aliases   {:cljd     {:main-opts ["-m"
+                                    "cljd.build"]}
+             :expound  {:extra-deps {expound/expound {:mvn/version "0.8.7"}}}
+             :crucible {:extra-deps {crucible/crucible {:mvn/version "0.46.0"}}}
+             :test     {:extra-paths ["test"]}}
+ :cljd/opts {:main main
+             :kind :dart}}
